@@ -25,6 +25,7 @@ function switchView(view) {
     // Hide header only on role selection
     header.classList.toggle('hidden', view === 'role');
 
+
     if (view === 'role') {
         roleBadge.classList.add('hidden');
         backBtn.classList.add('hidden');
