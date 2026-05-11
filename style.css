@@ -530,11 +530,48 @@ textarea {
     margin-bottom: 0;
 }
 
+/* Quiz List - Teacher Dashboard */
+.quiz-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--input-bg);
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+}
+
+.quiz-list-item:hover {
+    transform: translateX(5px);
+    box-shadow: 4px 4px 0 var(--gray-blue);
+}
+
+.quiz-info h3 {
+    margin-bottom: 0.3rem;
+    color: var(--dark-gray-blue);
+}
+
+.quiz-meta {
+    color: var(--gray-blue-v2);
+    font-size: var(--fs-sm);
+    margin-bottom: 0.5rem;
+}
+
+.quiz-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
 /* Misc */
 .teacher-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 /* Simple Responsiveness */

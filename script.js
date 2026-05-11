@@ -73,7 +73,7 @@ function renderTeacherDashboard() {
                     <div class="quiz-meta">${q.questions.length} Questions • Created: ${date}</div>
                 </div>
                 <div class="quiz-actions">
-                    <button class="btn btn-warning btn-small" onclick="editQuiz('${q.id}')">✏️ Edit</button>
+                    <button class="btn btn-warning btn-small" onclick="editQuiz('${q.id}')">✎ Edit</button>
                     <button class="btn btn-danger btn-small" onclick="deleteQuiz('${q.id}')">️ Delete</button>
                 </div>
             </div>
