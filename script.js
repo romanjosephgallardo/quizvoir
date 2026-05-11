@@ -111,13 +111,49 @@ function switchView(view) {
     }
 }
 
+// Confirm leaving teacher form with unsaved changes
+function confirmLeaveTeacherForm() {
+    const isEditing = Boolean(editingQuizId);
+
+    const title = document.getElementById('t-title')?.value.trim() || '';
+    const timer = document.getElementById('t-timer')?.value.trim() || '00:00:00';
+    const questionBlocks = document.querySelectorAll('.question-block').length;
+
+    const hasQuestionContent = Array.from(
+    document.querySelectorAll('#t-questions input[type="text"], #t-questions textarea')
+    ).some(el => el.value.trim() !== '');
+
+    const hasChanges = title !== '' || timer !== '00:00:00' || questionBlocks > 0 || hasQuestionContent;
+
+    if (!hasChanges) return true;
+
+    const message = isEditing
+    ? 'You have unsaved changes while editing this quiz. Discard changes and go back?'
+    : 'Cancel creating this quiz and go back?';
+
+    if (!confirm(message)) return false;
+
+    resetTeacherForm();
+    return true;
+}
+
+// handles cancel button in teacher create/edit form
+function handleTeacherCancel() {
+    if (!confirmLeaveTeacherForm()) return;
+    switchView('teacher-dashboard');
+}
+
 // handles pressing Back to home while taking quiz
 function goBack() {
     const currentView = viewHistory[viewHistory.length - 1];
 
+    if (currentView === 'teacher-create') {
+        if (!confirmLeaveTeacherForm()) return;
+    }
+
     if (currentView === 'quiz') {
         if (!confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?')) return;
-        stopQuizTimer(); 
+        stopQuizTimer();
     }
 
     if (currentView === 'results') {
