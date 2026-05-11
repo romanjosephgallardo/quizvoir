@@ -142,6 +142,7 @@ function editQuiz(id) {
     editingQuizId = id;
     document.getElementById('form-title').textContent = 'Edit Quiz';
     document.getElementById('t-title').value = quiz.title;
+    document.getElementById('t-timer').value = quiz.timer || '00:00:00';
 
     const container = document.getElementById('t-questions');
     container.innerHTML = '';
@@ -181,6 +182,7 @@ function resetTeacherForm() {
     document.getElementById('form-title').textContent = 'Create a Quiz';
     document.getElementById('t-title').value = '';
     document.getElementById('t-questions').innerHTML = '';
+    document.getElementById('t-timer').value = '00:00:00';
     questionCount = 0;
     updateCounter();
 }
@@ -269,6 +271,35 @@ function saveQuiz() {
         }
     } else {
         quizzes.push({ id: Date.now().toString(), title, questions, createdAt: new Date().toISOString() });
+    }
+
+    const timer = document.getElementById('t-timer').value.trim();
+
+    if (!/^\d{2}:\d{2}:\d{2}$/.test(timer)) {
+        errEl.textContent = 'Timer must be in HH:MM:SS format.';
+        errEl.classList.remove('hidden');
+        return;
+    }
+
+    if (editingQuizId) {
+    const index = quizzes.findIndex(q => q.id === editingQuizId);
+    if (index !== -1) {
+        quizzes[index] = {
+            ...quizzes[index],
+            title,
+            questions,
+            timer,
+            updatedAt: new Date().toISOString()
+        };
+    }
+    } else {
+        quizzes.push({
+            id: Date.now().toString(),
+            title,
+            questions,
+            timer,
+            createdAt: new Date().toISOString()
+        });
     }
 
     saveQuizzes(quizzes);
