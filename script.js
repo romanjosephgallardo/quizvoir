@@ -327,6 +327,13 @@ function startQuiz(id) {
     updateAnsweredCount();
 }
 
+// Add New Quiz
+function startNewQuiz() {
+    editingQuizId = null;
+    resetTeacherForm();
+    switchView('teacher-create');
+}
+
 function updateAnsweredCount() {
     const quiz = getQuizzes().find(q => q.id === currentQuizId);
     if (!quiz) return;
