@@ -1,0 +1,467 @@
+:root {
+    /* Color Styles */
+    --gray-blue: #8d99ae;
+    --gray-blue-v2: #697387;
+    --dark-gray-blue: #212234;
+    --light-azure: #dee8ed;
+    --black: #000000;
+    --gray: #3e3e3e;
+    --red: #e63946;
+    --green: #2a9d8f;
+    --bg-color: #cdd1d4;
+    --card-bg: #a8b2c1;
+    --input-bg: #b8c0d4;
+
+    /* Font Size */
+    --fs-xs: 13px;
+    --fs-sm: 14px;
+    --fs-base: 16px;
+    --fs-base-lg: 18px; 
+    --fs-md: 20px;
+    --fs-lg: 25px;
+    --fs-xl: 31px;
+    --fs-xxl: 39px;
+    --fs-hero: 49px;
+
+    /* Font */
+    --Poppins: 'Poppins', sans-serif;
+}
+
+html, body {
+    font-family: var(--Poppins);
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/Poppins/Poppins.woff2') format('woff2'),
+            url('fonts/Poppins/Poppins.woff') format('woff'),
+            url('fonts/Poppins/Poppins.ttf') format('truetype');
+}
+
+
+input, textarea, button, select {
+    font-family: var(--Poppins);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--dark-gray-blue);
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* Layout */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.5rem 2rem;
+
+    background: var(--bg-color);
+    border-bottom: 2px solid var(--dark-gray-blue);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--fs-xxl);
+    font-weight: bold;
+    color: var(--dark-gray-blue);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo span {
+    position: relative;
+}
+
+.logo span::after {
+    content: '*';
+
+    position: absolute;
+    top: -10px;
+    right: -8px;
+
+    font-size: 12px;
+}
+
+.header-badges {
+    display: flex;
+    gap: 0.8rem;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 1.2rem;
+
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 20px;
+
+    background: var(--dark-gray-blue);
+    color: white;
+
+    font-size: var(--fs-sm);
+
+    transition: all 0.2s;
+}
+
+.badge-outline {
+    background: transparent;
+    color: var(--dark-gray-blue);
+    cursor: pointer;
+}
+
+.badge-outline:hover {
+    background: var(--dark-gray-blue);
+    color: white;
+}
+
+
+/* =========================
+   ROLE SELECTION
+========================= */
+
+.role-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 80vh;
+
+    text-align: center;
+}
+
+.role-title {
+    margin-bottom: 2rem;
+
+    font-size: var(--fs-xl);
+    color: var(--dark-gray-blue);
+}
+
+.role-card {
+    padding: 3rem;
+
+    background: var(--card-bg);
+
+    border: 3px solid var(--dark-gray-blue);
+    border-radius: 20px;
+
+    box-shadow: 8px 8px 0 var(--dark-gray-blue);
+}
+
+.role-buttons {
+    display: flex;
+    gap: 1.5rem;
+
+    margin-top: 2rem;
+}
+
+.role-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+
+    min-width: 180px;
+    padding: 1.2rem 2.5rem;
+
+    border: 3px solid var(--dark-gray-blue);
+    border-radius: 12px;
+
+    background: var(--dark-gray-blue);
+    color: white;
+
+    font-size: var(--fs-base-lg);
+
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.role-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 0 var(--gray-blue-v2);
+}
+
+.role-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card,
+.question-card,
+.question-block,
+.score-card {
+    background: var(--card-bg);
+
+    border: 3px solid var(--dark-gray-blue);
+    border-radius: 20px;
+}
+
+.card {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+
+    box-shadow: 6px 6px 0 var(--dark-gray-blue);
+}
+
+.question-card {
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+
+    border-radius: 15px;
+}
+
+.question-block {
+    position: relative;
+
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+    border-radius: 15px;
+}
+
+.score-card {
+    padding: 3rem;
+    margin-bottom: 2rem;
+
+    text-align: center;
+
+    box-shadow: 8px 8px 0 var(--dark-gray-blue);
+}
+
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.card-header {
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    margin-bottom: 0.5rem;
+
+    font-size: var(--fs-xl);
+    color: var(--dark-gray-blue);
+}
+
+.card-subtitle,
+.quiz-meta,
+.stat-label,
+.counter {
+    color: var(--gray-blue-v2);
+}
+
+.question-text {
+    margin-bottom: 1.5rem;
+
+    font-size: var(--fs-base-lg);
+    line-height: 1.6;
+}
+
+.score-display {
+    margin-bottom: 1rem;
+
+    font-size: var(--fs-hero);
+    font-weight: bold;
+}
+
+.score-message {
+    margin-bottom: 0.5rem;
+
+    font-size: var(--fs-lg);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 1rem 2rem;
+
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 10px;
+
+    font-size: var(--fs-base);
+    font-weight: 600;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--dark-gray-blue);
+    color: white;
+}
+
+.btn-success {
+    background: var(--green);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--red);
+    color: white;
+}
+
+.btn-warning {
+    background: #f4a261;
+    color: var(--dark-gray-blue);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--dark-gray-blue);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: var(--fs-sm);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-warning:hover {
+    box-shadow: 4px 4px 0 var(--gray-blue-v2);
+}
+
+.btn-outline:hover {
+    background: var(--dark-gray-blue);
+    color: white;
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 0.5rem;
+
+    font-size: var(--fs-base);
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 1rem;
+
+    background: var(--input-bg);
+    color: var(--dark-gray-blue);
+
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 10px;
+
+    font-size: var(--fs-base);
+
+    transition: all 0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+
+    border-color: var(--gray-blue);
+    box-shadow: 3px 3px 0 var(--gray-blue);
+}
+
+textarea {
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .container,
+    .header,
+    .footer-bar {
+        padding: 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .role-buttons,
+    .teacher-actions,
+    .quiz-actions,
+    .footer-bar {
+        flex-direction: column;
+    }
+
+    .quiz-actions {
+        width: 100%;
+    }
+
+    .quiz-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

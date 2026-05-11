@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizvoir</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="header">
+        <a class="logo" onclick="switchView('role')">
+            <img src="./images/quizvoir.png" alt="QuizVoir Logo" style="height: 200px;">
+        </a>
+        <div class="header-badges">
+            <div id="role-badge" class="badge hidden">
+                <span id="role-text">Student</span>
+            </div>
+            <button class="badge badge-outline hidden" id="back-btn" onclick="goBack()">← Back</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ROLE SELECTION -->
+        <section id="view-role" class="role-container">
+            <div class="logo" style="font-size: 4rem; margin-bottom: 0.5rem;">
+                <img src="./images/quizvoir.png" alt="QuizVoir Logo" style="height: 200px;">
+            </div>
+            <p style="font-size: var(--fs-base-lg); color: var(--gray-blue-v2); margin-bottom: 3rem; letter-spacing: 2px;">
+                INTERACTIVE QUIZ PLATFORM
+            </p>
+            <div class="role-card">
+                <h2 class="role-title">What's your role?</h2>
+                <div class="role-buttons">
+                    <button class="role-btn" onclick="switchView('teacher-dashboard')">
+                        <!-- add teacher icon here -->
+                        Teacher
+                    </button>
+                    <button class="role-btn" onclick="switchView('student')">
+                        <!-- add student icon here -->
+                        Student
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEACHER: DASHBOARD -->
+        <section id="view-teacher-dashboard" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">My Quizzes</h1>
+                    <p class="card-subtitle">Manage your created quizzes</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-quizzes">0</div>
+                        <div class="stat-label">Total Quizzes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-questions">0</div>
+                        <div class="stat-label">Total Questions</div>
+                    </div>
+                </div>
+                <div class="teacher-actions">
+                    <button class="btn btn-primary" onclick="switchView('teacher-create')">+ Create New Quiz</button>
+                    <button class="btn btn-outline" onclick="switchView('role')">← Back to Home</button>
+                </div>
+                <div id="teacher-quiz-list">
+                    <p style="text-align: center; padding: 3rem; color: var(--gray-blue-v2);">
+                        No quizzes created yet. Click "Create New Quiz" to start!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEACHER: CREATE/EDIT -->
+        <section id="view-teacher-create" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title" id="form-title">Create a Quiz</h1>
+                    <p class="card-subtitle">Add 5 to 10 questions. Set one correct answer per question.</p>
+                </div>
+                <div class="form-group">
+                    <label>Quiz Title</label>
+                    <input type="text" id="t-title" placeholder="e.g. Chapter 1: Introduction to Web Basics">
+                </div>
+                <div id="t-questions"></div>
+                <div class="counter"><span id="t-count">0</span> / 10 Questions</div>
+                <div class="error hidden" id="t-error"></div>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="addQuestion()">+ Add Question</button>
+                    <button class="btn btn-success" onclick="saveQuiz()">💾 Save Quiz</button>
+                    <button class="btn btn-outline" onclick="switchView('teacher-dashboard')">Cancel</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT: LIST -->
+        <section id="view-student" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Available Quizzes</h1>
+                    <p class="card-subtitle">Select a quiz to start</p>
+                </div>
+                <div id="s-list"><p style="text-align: center; padding: 3rem; color: var(--gray-blue-v2);">Loading quizzes...</p></div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="btn btn-outline" onclick="switchView('role')">← Back to Home</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENT: TAKE QUIZ -->
+        <section id="view-quiz" class="hidden" style="padding-bottom: 100px;">
+            <div class="quiz-header">
+                <h1 class="quiz-title-display" id="q-title"></h1>
+                <span class="questions-badge" id="q-count"></span>
+            </div>
+            <div id="q-container"></div>
+            <div class="error hidden" id="q-error"></div>
+            <div class="footer-bar">
+                <div class="answer-counter">
+                    <span id="answered-count">0</span> / <span id="total-count">0</span> answered
+                </div>
+                <button class="btn btn-submit" onclick="submitQuiz()">SUBMIT</button>
+            </div>
+        </section>
+
+        <!-- STUDENT: RESULTS -->
+        <section id="view-results" class="hidden">
+            <div class="score-card">
+                <div class="score-display" id="res-score">0 / 0</div>
+                <div class="score-message" id="res-msg"></div>
+                <div class="score-detail" id="res-detail"></div>
+            </div>
+            <div class="review-section">
+                <h2 style="margin-bottom: 1.5rem; font-size: var(--fs-lg);">Review Answers</h2>
+                <div id="res-container"></div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-primary" onclick="switchView('student')">← Back to Quizzes</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="/script.js" defer></script>
+</body>
+</html>
