@@ -40,13 +40,61 @@ function switchView(view) {
     }
 }
 
+// handles pressing Back to home while taking quiz
 function goBack() {
+    const currentView = viewHistory[viewHistory.length - 1];
+
+    if (currentView === 'quiz') {
+        if (!confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?')) return;
+    }
+
+    if (currentView === 'results') {
+        switchView('role');
+        return;
+    }
+
     if (viewHistory.length > 1) {
         viewHistory.pop();
         switchView(viewHistory[viewHistory.length - 1]);
     } else {
         switchView('role');
     }
+}
+
+function handleLogoClick() {
+    const currentView = viewHistory[viewHistory.length - 1];
+    if (currentView === 'quiz') {
+        const ok = confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?');
+        if (!ok) return;
+    }
+    switchView('role');
+}
+
+function switchView(view) {
+    document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+    document.getElementById(`view-${view}`).classList.remove('hidden');
+
+    const header = document.querySelector('.header');
+    const roleBadge = document.getElementById('role-badge');
+    const backBtn = document.getElementById('back-btn');
+    const roleText = document.getElementById('role-text');
+
+    header.classList.toggle('hidden', view === 'role');
+
+    if (view === 'role') {
+        roleBadge.classList.add('hidden');
+        backBtn.classList.add('hidden');
+        viewHistory = ['role'];
+    } else {
+        roleBadge.classList.remove('hidden');
+        backBtn.classList.remove('hidden');
+        roleText.textContent = view.includes('teacher') ? 'Teacher' : 'Student';
+        viewHistory.push(view);
+    }
+
+    if (view === 'student') renderQuizList();
+    if (view === 'teacher-dashboard') renderTeacherDashboard();
+    if (view === 'teacher-create' && !editingQuizId) resetTeacherForm();
 }
 
 // TEACHER DASHBOARD
