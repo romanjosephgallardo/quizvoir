@@ -256,12 +256,23 @@ function startQuiz(id) {
     document.getElementById('total-count').textContent = quiz.questions.length;
 
     document.getElementById('q-container').innerHTML = quiz.questions.map((q, i) => `
-        <div class="question-card">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;"><span class="q-badge">Q${i + 1}</span><div class="question-text">${q.text}</div></div>
-            <div class="answer-options">${q.choices.map((c, idx) => `
-                <label class="answer-option"><input type="radio" name="ans-${i}" value="${idx}" onchange="updateAnsweredCount()"><span class="answer-letter">${String.fromCharCode(65 + idx)}.</span><span>${c}</span></label>`).join('')}
+        <article class="quiz-question-card">
+            <div class="quiz-question-top">
+                <span class="q-badge">Q${i + 1}</span>
+                <div class="question-text">${q.text}</div>
             </div>
-        </div>`).join('');
+
+            <div class="answer-options">
+                ${q.choices.map((c, idx) => `
+                    <label class="answer-option">
+                        <input type="radio" name="ans-${i}" value="${idx}" onchange="updateAnsweredCount()">
+                        <span class="answer-letter">${String.fromCharCode(65 + idx)}.</span>
+                        <span class="answer-text">${c}</span>
+                    </label>
+                `).join('')}
+            </div>
+        </article>
+    `).join('');
 
     switchView('quiz');
     document.getElementById('q-error').classList.add('hidden');
@@ -326,12 +337,36 @@ function submitQuiz() {
     document.getElementById('res-detail').textContent = `You scored ${percent}% — ${correct} correct out of ${quiz.questions.length} questions.`;
 
     document.getElementById('res-container').innerHTML = reviewData.map(r => `
-        <div class="review-item">
-            <div class="review-question"><span class="q-badge" style="display:inline-block;margin-right:0.8rem;">Q${r.qNum}</span>${r.qText}</div>
-            <div class="review-answer user-answer"><strong>Your Answer:</strong> <span>${r.userAns}</span></div>
-            ${!r.isCorrect ? `<div class="review-answer incorrect"><strong>Incorrect</strong></div><div class="review-answer correct"><strong>Correct Answer:</strong> <span>${r.correctAns}</span></div>` : `<div class="review-answer correct"><strong>✓ Correct!</strong></div>`}
-            <div class="explanation-box"><strong>💡 Explanation:</strong> ${r.explanation}</div>
-        </div>`).join('');
+        <article class="review-item ${r.isCorrect ? 'review-correct' : 'review-incorrect'}">
+            <div class="review-header">
+                <div class="review-question-section">
+                    <span class="q-badge">Q${r.qNum}</span>
+                    <div class="review-question">${r.qText}</div>
+                </div>
+                <div class="review-status-badge ${r.isCorrect ? 'badge-correct' : 'badge-incorrect'}">
+                    ${r.isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                </div>
+            </div>
+
+            <div class="review-answer-section">
+                <div class="review-answer ${r.isCorrect ? 'your-answer-correct' : 'your-answer-incorrect'}">
+                    <strong>Your Answer:</strong>
+                    <span>${r.userAns}</span>
+                </div>
+                ${!r.isCorrect ? `
+                    <div class="review-answer correct-answer">
+                        <strong>Correct Answer:</strong>
+                        <span>${r.correctAns}</span>
+                    </div>
+                ` : ''}
+            </div>
+
+            <div class="explanation-box">
+                <strong>✴︎ Explanation</strong>
+                <p>${r.explanation}</p>
+            </div>
+        </article>
+    `).join('');
 
     switchView('results');
     window.scrollTo(0, 0);
