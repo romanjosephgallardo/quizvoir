@@ -72,12 +72,6 @@ body {
     padding: 3rem 2rem;
 }
 
-#quizVoirLogo {
-    padding: 0;
-    margin: 0; 
-}
-
-
 /* Header */
 .header {
     display: flex;
@@ -151,11 +145,7 @@ body {
     color: white;
 }
 
-
-/* =========================
-   ROLE SELECTION
-========================= */
-
+/* Role Selection */
 .role-container {
     display: flex;
     flex-direction: column;
@@ -233,10 +223,7 @@ body {
 }
 
 
-/* =========================
-   CARDS
-========================= */
-
+/* Card */
 .card,
 .question-card,
 .question-block,
@@ -279,18 +266,34 @@ body {
     box-shadow: 8px 8px 0 var(--dark-gray-blue);
 }
 
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 
-/* =========================
-   TYPOGRAPHY
-========================= */
+.stat-card {
+    padding: 1.5rem;
+    text-align: center;
+    background: var(--light-azure);
+    border: 3px solid var(--dark-gray-blue);
+    border-radius: 15px;
+}
 
+.stat-value {
+    font-size: var(--fs-lg);
+    font-weight: bold;
+    color: var(--dark-gray-blue);
+}
+
+/*  Typography */
 .card-header {
     margin-bottom: 2rem;
 }
 
 .card-title {
-    margin-bottom: 0.5rem;
-
+    margin-bottom: -3px;
     font-size: var(--fs-xl);
     color: var(--dark-gray-blue);
 }
@@ -323,24 +326,18 @@ body {
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
 
+/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-
-    padding: 1rem 2rem;
-
+    padding: 13px 13px;
     border: 2px solid var(--dark-gray-blue);
     border-radius: 10px;
-
     font-size: var(--fs-base);
     font-weight: 600;
     text-decoration: none;
-
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -392,19 +389,14 @@ body {
 }
 
 
-/* =========================
-   FORMS
-========================= */
-
+/* Form Actions */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
 label {
     display: block;
-
     margin-bottom: 0.5rem;
-
     font-size: var(--fs-base);
     font-weight: 600;
 }
@@ -440,10 +432,14 @@ textarea {
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* Misc */
+.teacher-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
 
+/* Simple Responsiveness */
 @media (max-width: 768px) {
 
     .container,
