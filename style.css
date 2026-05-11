@@ -405,15 +405,11 @@ input[type="text"],
 textarea {
     width: 100%;
     padding: 1rem;
-
     background: var(--input-bg);
     color: var(--dark-gray-blue);
-
     border: 2px solid var(--dark-gray-blue);
     border-radius: 10px;
-
     font-size: var(--fs-base);
-
     transition: all 0.2s;
 }
 
@@ -430,6 +426,23 @@ textarea {
     resize: vertical;
     font-family: inherit;
 }
+
+/* Explanation field inside quiz builder */
+textarea.q-exp {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(180deg, #bcc6d8 0%, #b2bdd1 100%);
+    color: var(--dark-gray-blue);
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 12px;
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    resize: vertical;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition: all 0.2s ease;
+}
+
 
 
 /* Questions Block - Teacher */
@@ -983,6 +996,46 @@ textarea {
     background: var(--green);
     color: white;
 }
+
+/* Custom scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--dark-gray-blue) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 999px;
+    margin: 4px; /* adds breathing room at the ends */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--dark-gray-blue), var(--gray-blue-v2));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box; /* makes border act as padding, not color */
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gray-blue);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--gray-blue-v2);
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
 /* Simple Responsiveness */
 @media (max-width: 768px) {
 
