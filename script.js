@@ -117,6 +117,7 @@ function goBack() {
 
     if (currentView === 'quiz') {
         if (!confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?')) return;
+        stopQuizTimer(); 
     }
 
     if (currentView === 'results') {
@@ -137,6 +138,7 @@ function handleLogoClick() {
     if (currentView === 'quiz') {
         const ok = confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?');
         if (!ok) return;
+        stopQuizTimer();  // Add this line
     }
     switchView('role');
 }
