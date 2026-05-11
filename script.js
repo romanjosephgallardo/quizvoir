@@ -348,21 +348,29 @@ function submitQuiz() {
                 </div>
             </div>
 
-            <div class="review-answer-section">
-                <div class="review-answer ${r.isCorrect ? 'your-answer-correct' : 'your-answer-incorrect'}">
-                    <strong>Your Answer:</strong>
-                    <span>${r.userAns}</span>
+            <div class="result-choices-section">
+                <p class="result-choices-label">Your choices:</p>
+                <div class="result-choices">
+                    ${Array.from({length: Object.keys(getQuizzes().find(q => q.id === currentQuizId).questions[r.qNum - 1].choices).length}, (_, idx) => {
+                        const choice = getQuizzes().find(q => q.id === currentQuizId).questions[r.qNum - 1].choices[idx];
+                        const isStudentChoice = getQuizzes().find(q => q.id === currentQuizId).questions[r.qNum - 1].choices.indexOf(r.userAns) === idx;
+                        const isCorrect = getQuizzes().find(q => q.id === currentQuizId).questions[r.qNum - 1].choices.indexOf(r.correctAns) === idx;
+                        
+                        return `
+                            <div class="result-choice-item ${isStudentChoice && !r.isCorrect ? 'student-wrong' : ''} ${isCorrect && !r.isCorrect ? 'correct-highlight' : ''} ${isCorrect && r.isCorrect ? 'student-correct' : ''}">
+                                <span class="choice-letter">${String.fromCharCode(65 + idx)}.</span>
+                                <span class="choice-content">${choice}</span>
+                                ${isStudentChoice && !r.isCorrect ? '<span class="choice-marker">✗ Your Answer</span>' : ''}
+                                ${isCorrect && !r.isCorrect ? '<span class="choice-marker">✓ Correct</span>' : ''}
+                                ${isCorrect && r.isCorrect ? '<span class="choice-marker">✓ Your Answer</span>' : ''}
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
-                ${!r.isCorrect ? `
-                    <div class="review-answer correct-answer">
-                        <strong>Correct Answer:</strong>
-                        <span>${r.correctAns}</span>
-                    </div>
-                ` : ''}
             </div>
 
             <div class="explanation-box">
-                <strong>✴︎ Explanation</strong>
+                <strong>✴︎ Explanation: </strong>
                 <p>${r.explanation}</p>
             </div>
         </article>

@@ -742,7 +742,7 @@ textarea {
     right: 0;
     background: rgba(168, 178, 193, 0.96);
     backdrop-filter: blur(8px);
-    border-top: 3px solid var(--dark-gray-blue);
+    border-top: 5px solid var(--dark-gray-blue);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -750,6 +750,40 @@ textarea {
     gap: 1rem;
     z-index: 1000;
 }
+
+.footer-bar .error {
+    position: absolute;
+    bottom: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    margin: 0;
+    padding: 0.8rem 1.2rem;
+    background: var(--light-azure);
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-left: 5px solid var(--red);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    animation: slideUp 0.3s ease;
+    white-space: normal;
+    text-align: center;
+    z-index: 999;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 
 .answer-counter {
     font-size: var(--fs-base);
@@ -867,67 +901,88 @@ textarea {
     flex: 1;
 }
 
-.your-answer-correct {
-    background: rgba(42, 157, 143, 0.15);
-    border-left: 4px solid var(--green);
-    color: var(--dark-gray-blue);
-}
-
-.your-answer-incorrect {
-    background: rgba(230, 57, 70, 0.15);
-    border-left: 4px solid var(--red);
-    color: var(--dark-gray-blue);
-}
-
-.correct-answer {
-    background: rgba(42, 157, 143, 0.2);
-    border-left: 4px solid var(--green);
-    color: var(--dark-gray-blue);
-}
-
-.explanation-box {
-    background: rgba(141, 153, 174, 0.12);
-    padding: 1.2rem;
-    border-radius: 12px;
-    border: 2px dashed var(--gray-blue);
-}
-
-.explanation-box strong {
-    color: var(--dark-gray-blue);
-    display: block;
-    margin-bottom: 0.6rem;
-    font-size: var(--fs-base);
-}
-
-.explanation-box p {
-    color: var(--dark-gray-blue);
-    font-size: var(--fs-base);
-    line-height: 1.6;
-    margin: 0;
-}
-
-.review-section {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.review-section h2 {
-    color: var(--dark-gray-blue);
+.result-choices-section {
     margin-bottom: 1.5rem;
 }
 
-.score-card {
-    background: linear-gradient(135deg, #a8b2c1 0%, #95a0b3 100%);
-    border-left: 6px solid var(--dark-gray-blue);
-}
-
-.score-detail {
+.result-choices-label {
+    font-size: var(--fs-sm);
+    font-weight: 700;
     color: var(--dark-gray-blue);
-    font-size: var(--fs-base-lg);
-    font-weight: 600;
-    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+.result-choices {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.result-choice-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.2rem;
+    background: var(--light-azure);
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 14px;
+    transition: all 0.2s ease;
+}
+
+.result-choice-item.student-wrong {
+    background: rgba(230, 57, 70, 0.2);
+    border-color: var(--red);
+    border-left: 5px solid var(--red);
+}
+
+.result-choice-item.correct-highlight {
+    background: rgba(42, 157, 143, 0.2);
+    border-color: var(--green);
+    border-left: 5px solid var(--green);
+}
+
+.result-choice-item.student-correct {
+    background: rgba(42, 157, 143, 0.2);
+    border-color: var(--green);
+    border-left: 5px solid var(--green);
+}
+
+.choice-letter {
+    min-width: 28px;
+    font-weight: 800;
+    color: var(--dark-gray-blue);
+}
+
+.choice-content {
+    flex: 1;
+    color: var(--dark-gray-blue);
+    font-size: var(--fs-base);
+    font-weight: 500;
+}
+
+.choice-marker {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.student-wrong .choice-marker {
+    background: var(--red);
+    color: white;
+}
+
+.correct-highlight .choice-marker {
+    background: var(--green);
+    color: white;
+}
+
+.student-correct .choice-marker {
+    background: var(--green);
+    color: white;
+}
 /* Simple Responsiveness */
 @media (max-width: 768px) {
 
