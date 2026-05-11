@@ -137,6 +137,8 @@ function confirmLeaveTeacherForm() {
     return true;
 }
 
+
+
 // handles cancel button in teacher create/edit form
 function handleTeacherCancel() {
     if (!confirmLeaveTeacherForm()) return;
@@ -238,12 +240,23 @@ function renderTeacherDashboard() {
 }
 
 function deleteQuiz(id) {
-    if (!confirm('Are you sure you want to delete this quiz? This action cannot be undone.')) return;
-    let quizzes = getQuizzes();
-    quizzes = quizzes.filter(q => q.id !== id);
-    saveQuizzes(quizzes);
+    const quizzes = getQuizzes();
+    const targetQuiz = quizzes.find(q => q.id === id);
+    if (!targetQuiz) {
+        alert('Quiz not found.');
+        return;
+    }
+
+    const ok = confirm(
+        `Delete quiz "${targetQuiz.title}"?\n\nThis action cannot be undone.`
+    );
+    if (!ok) return;
+
+    const updated = quizzes.filter(q => q.id !== id);
+    saveQuizzes(updated);
     renderTeacherDashboard();
 }
+
 
 function editQuiz(id) {
     const quiz = getQuizzes().find(q => q.id === id);
@@ -328,7 +341,13 @@ function addQuestion() {
 }
 
 function removeQuestion(id) {
-    document.getElementById(`block-${id}`).remove();
+    const ok = confirm('Remove this question?');
+    if (!ok) return;
+
+    const block = document.getElementById(`block-${id}`);
+    if (!block) return;
+
+    block.remove();
     questionCount--;
     updateCounter();
 }
