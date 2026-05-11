@@ -147,29 +147,36 @@ function handleTeacherCancel() {
 
 // handles pressing Back to home while taking quiz
 function goBack() {
-    const currentView = viewHistory[viewHistory.length - 1];
+    const currentView = viewHistory[viewHistory.length - 1] || 'role';
 
-    if (currentView === 'teacher-create') {
-        if (!confirmLeaveTeacherForm()) return;
-    }
+    // Guard: leaving teacher form with unsaved changes
+    if (currentView === 'teacher-create' && !confirmLeaveTeacherForm()) return;
 
+    // Guard: leaving active quiz
     if (currentView === 'quiz') {
-        if (!confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?')) return;
+        const ok = confirm('You have unsaved progress in this quiz. If you go back your answers will be lost. Continue?');
+        if (!ok) return;
         stopQuizTimer();
+        currentQuizId = null;
     }
 
+    // Results should always go back to student list
     if (currentView === 'results') {
+        stopQuizTimer();
         currentQuizId = null;
         switchView('student');
         return;
     }
 
+    // Normal back navigation
     if (viewHistory.length > 1) {
         viewHistory.pop();
-        switchView(viewHistory[viewHistory.length - 1]);
-    } else {
-        switchView('role');
+        const previousView = viewHistory[viewHistory.length - 1] || 'role';
+        switchView(previousView);
+        return;
     }
+
+    switchView('role');
 }
 
 function handleLogoClick() {
