@@ -840,16 +840,6 @@ textarea.q-exp {
     background: linear-gradient(90deg, #f4a261, var(--red));
 }
 
-@media (max-width: 768px) {
-    .footer-bar {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-timer {
-        min-width: 0;
-        width: 100%;
-    }
-}
 
 .answer-counter {
     font-size: var(--fs-base);
@@ -1087,28 +1077,6 @@ textarea.q-exp {
     justify-content: flex-end;
 }
 
-@media (max-width: 768px) {
-    .teacher-footer {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.8rem;
-    }
-
-    .teacher-footer-left {
-        width: 100%;
-    }
-
-    .teacher-footer-actions {
-        width: 100%;
-        justify-content: stretch;
-    }
-
-    .teacher-footer-actions .btn {
-        flex: 1;
-        justify-content: center;
-    }
-}
-
 /* Custom scrollbar */
 * {
     scrollbar-width: thin;
@@ -1146,34 +1114,4 @@ textarea.q-exp {
 
 ::-webkit-scrollbar-corner {
     background: transparent;
-}
-
-/* Simple Responsiveness */
-@media (max-width: 768px) {
-
-    .container,
-    .header,
-    .footer-bar {
-        padding: 1rem;
-    }
-
-    .card {
-        padding: 1.5rem;
-    }
-
-    .role-buttons,
-    .teacher-actions,
-    .quiz-actions,
-    .footer-bar {
-        flex-direction: column;
-    }
-
-    .quiz-actions {
-        width: 100%;
-    }
-
-    .quiz-actions .btn {
-        width: 100%;
-        justify-content: center;
-    }
 }
