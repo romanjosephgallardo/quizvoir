@@ -74,7 +74,7 @@
         </section>
 
         <!-- TEACHER: CREATE/EDIT -->
-        <section id="view-teacher-create" class="hidden">
+        <section id="view-teacher-create" class="hidden" style="padding-bottom: 120px;">
             <div class="card">
                 <div class="card-header">
                     <h1 class="card-title" id="form-title">Create a Quiz</h1>
@@ -94,10 +94,19 @@
                 <div id="t-questions"></div>
                 <div class="counter"><span id="t-count">0</span> / 10 Questions</div>
                 <div class="error hidden" id="t-error"></div>
-                <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn btn-primary" onclick="addQuestion()">+ Add Question</button>
-                    <button class="btn btn-success" onclick="saveQuiz()">𖤘 Save Quiz</button>
-                    <button class="btn btn-outline" onclick="handleTeacherCancel()">Cancel</button>
+                <div id="t-questions"></div>
+
+                <div class="footer-bar teacher-footer">
+                    <div class="teacher-footer-left">
+                        <div class="counter"><span id="t-count">0</span> / 10 Questions</div>
+                        <div class="error hidden" id="t-error"></div>
+                    </div>
+
+                    <div class="teacher-footer-actions">
+                        <button class="btn btn-primary" onclick="addQuestion()">+ Add Question</button>
+                        <button class="btn btn-success" onclick="saveQuiz()">𖤘 Save Quiz</button>
+                        <button class="btn btn-outline" onclick="handleTeacherCancel()">Cancel</button>
+                    </div>
                 </div>
             </div>
         </section>
