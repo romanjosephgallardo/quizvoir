@@ -11,6 +11,75 @@ document.addEventListener('DOMContentLoaded', () => {
     switchView('role');
 });
 
+// QUIZ TIMER LOGIC
+let quizTimerInterval = null;
+let quizTimeTotal = 0;
+let quizTimeLeft = 0;
+
+function parseTimeToSeconds(timeString) {
+    const parts = timeString.split(':').map(Number);
+    const [hours, minutes, seconds] = parts;
+    return (hours * 3600) + (minutes * 60) + seconds;
+}
+
+function formatSeconds(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return [hours, minutes, seconds]
+        .map(value => String(value).padStart(2, '0'))
+        .join(':');
+}
+
+function stopQuizTimer() {
+    if (quizTimerInterval) {
+        clearInterval(quizTimerInterval);
+        quizTimerInterval = null;
+    }
+}
+
+function updateQuizTimerUI() {
+    const timeLeftEl = document.getElementById('time-left');
+    const progressFill = document.getElementById('time-progress-fill');
+
+    if (!timeLeftEl || !progressFill || quizTimeTotal <= 0) return;
+
+    timeLeftEl.textContent = formatSeconds(quizTimeLeft);
+
+    const percentUsed = Math.max(0, Math.min(100, ((quizTimeTotal - quizTimeLeft) / quizTimeTotal) * 100));
+    progressFill.style.width = `${percentUsed}%`;
+
+    if (quizTimeLeft <= 30) {
+        progressFill.classList.add('time-low');
+    } else {
+        progressFill.classList.remove('time-low');
+    }
+}
+
+function startQuizTimer(durationString) {
+    stopQuizTimer();
+
+    quizTimeTotal = parseTimeToSeconds(durationString || '00:00:00');
+    quizTimeLeft = quizTimeTotal;
+
+    updateQuizTimerUI();
+
+    quizTimerInterval = setInterval(() => {
+        quizTimeLeft -= 1;
+
+        if (quizTimeLeft <= 0) {
+            quizTimeLeft = 0;
+            updateQuizTimerUI();
+            stopQuizTimer();
+            submitQuiz(true);
+            return;
+        }
+
+        updateQuizTimerUI();
+    }, 1000);
+}
+
 function switchView(view) {
     document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${view}`).classList.remove('hidden');
@@ -21,6 +90,8 @@ function switchView(view) {
     const roleText = document.getElementById('role-text');
 
     header.classList.toggle('hidden', view === 'role');
+
+    if (view !== 'quiz') stopQuizTimer();
 
     if (view === 'role') {
         roleBadge.classList.add('hidden');
@@ -225,10 +296,17 @@ function removeQuestion(id) {
 
 function saveQuiz() {
     const title = document.getElementById('t-title').value.trim();
+    const timer = document.getElementById('t-timer').value.trim();
     const errEl = document.getElementById('t-error');
 
     if (!title) {
         errEl.textContent = 'Quiz title is required.';
+        errEl.classList.remove('hidden');
+        return;
+    }
+
+    if (!/^\d{2}:\d{2}:\d{2}$/.test(timer)) {
+        errEl.textContent = 'Timer must be in HH:MM:SS format.';
         errEl.classList.remove('hidden');
         return;
     }
@@ -262,36 +340,19 @@ function saveQuiz() {
         });
     }
 
-    let quizzes = getQuizzes();
+    const quizzes = getQuizzes();
 
     if (editingQuizId) {
         const index = quizzes.findIndex(q => q.id === editingQuizId);
         if (index !== -1) {
-            quizzes[index] = { ...quizzes[index], title, questions, updatedAt: new Date().toISOString() };
+            quizzes[index] = {
+                ...quizzes[index],
+                title,
+                questions,
+                timer,
+                updatedAt: new Date().toISOString()
+            };
         }
-    } else {
-        quizzes.push({ id: Date.now().toString(), title, questions, createdAt: new Date().toISOString() });
-    }
-
-    const timer = document.getElementById('t-timer').value.trim();
-
-    if (!/^\d{2}:\d{2}:\d{2}$/.test(timer)) {
-        errEl.textContent = 'Timer must be in HH:MM:SS format.';
-        errEl.classList.remove('hidden');
-        return;
-    }
-
-    if (editingQuizId) {
-    const index = quizzes.findIndex(q => q.id === editingQuizId);
-    if (index !== -1) {
-        quizzes[index] = {
-            ...quizzes[index],
-            title,
-            questions,
-            timer,
-            updatedAt: new Date().toISOString()
-        };
-    }
     } else {
         quizzes.push({
             id: Date.now().toString(),
@@ -356,6 +417,7 @@ function startQuiz(id) {
     switchView('quiz');
     document.getElementById('q-error').classList.add('hidden');
     updateAnsweredCount();
+    startQuizTimer(quiz.timer);
 }
 
 // Add New Quiz
@@ -365,6 +427,7 @@ function startNewQuiz() {
     switchView('teacher-create');
 }
 
+// Quiz Answering Logic
 function updateAnsweredCount() {
     const quiz = getQuizzes().find(q => q.id === currentQuizId);
     if (!quiz) return;
@@ -376,7 +439,7 @@ function updateAnsweredCount() {
     document.getElementById('answered-count').textContent = answered;
 }
 
-function submitQuiz() {
+function submitQuiz(isAutoSubmit = false) {
     const quiz = getQuizzes().find(q => q.id === currentQuizId);
     if (!quiz) return;
 
@@ -392,11 +455,21 @@ function submitQuiz() {
         answers.push(parseInt(selected.value));
     }
 
-    if (!allAnswered) {
+    // SKIP validation if auto-submitting from timer
+    if (!isAutoSubmit && !allAnswered) {
         const errorEl = document.getElementById('q-error');
         errorEl.textContent = 'Please answer all questions before submitting.';
         errorEl.classList.remove('hidden');
         return;
+    }
+
+    // If auto-submit and not all answered, fill missing answers with -1 (unanswered indicator)
+    if (isAutoSubmit && !allAnswered) {
+        for (let i = 0; i < quiz.questions.length; i++) {
+            if (!document.querySelector(`input[name="ans-${i}"]:checked`)) {
+                answers[i] = -1;
+            }
+        }
     }
 
     let correct = 0;
@@ -408,7 +481,7 @@ function submitQuiz() {
         reviewData.push({
             qNum: i + 1,
             qText: q.text,
-            userAns: q.choices[answers[i]],
+            userAns: answers[i] >= 0 ? q.choices[answers[i]] : '(Not answered)',
             correctAns: q.choices[q.correctIndex],
             isCorrect,
             explanation: q.explanation
@@ -462,6 +535,7 @@ function submitQuiz() {
         </article>
     `).join('');
 
+    stopQuizTimer();
     switchView('results');
     window.scrollTo(0, 0);
 }

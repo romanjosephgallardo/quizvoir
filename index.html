@@ -123,13 +123,22 @@
                 <span class="questions-badge" id="q-count"></span>
             </div>
             <div id="q-container"></div>
-            <div class="footer-bar">
-                <div class="answer-counter">
-                    <span id="answered-count">0</span> / <span id="total-count">0</span> answered
+                <div class="footer-bar">
+                    <div class="footer-timer">
+                        <div class="timer-label">Time Left</div>
+                        <div class="timer-value" id="time-left">00:00:00</div>
+                        <div class="time-progress-track">
+                            <div class="time-progress-fill" id="time-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="answer-counter">
+                        <span id="answered-count">0</span> / <span id="total-count">0</span> answered
+                    </div>
+
+                    <div class="error hidden" id="q-error"></div>
+                    <button class="btn btn-submit" onclick="submitQuiz()">SUBMIT</button>
                 </div>
-                <div class="error hidden" id="q-error"></div>
-                <button class="btn btn-submit" onclick="submitQuiz()">SUBMIT</button>
-            </div>
         </section>
 
         <!-- STUDENT: RESULTS -->

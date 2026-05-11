@@ -797,6 +797,59 @@ textarea.q-exp {
     }
 }
 
+/* Timer */
+.footer-timer {
+    min-width: 220px;
+}
+
+.timer-label {
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--gray-blue-v2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+}
+
+.timer-value {
+    font-size: var(--fs-lg);
+    font-weight: 800;
+    color: var(--dark-gray-blue);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.time-progress-track {
+    width: 100%;
+    height: 10px;
+    background: rgba(33, 34, 52, 0.12);
+    border: 2px solid var(--dark-gray-blue);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.time-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green), #f4a261);
+    border-radius: inherit;
+    transition: width 0.35s linear;
+}
+
+.time-progress-fill.time-low {
+    background: linear-gradient(90deg, #f4a261, var(--red));
+}
+
+@media (max-width: 768px) {
+    .footer-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-timer {
+        min-width: 0;
+        width: 100%;
+    }
+}
 
 .answer-counter {
     font-size: var(--fs-base);
@@ -996,6 +1049,10 @@ textarea.q-exp {
     background: var(--green);
     color: white;
 }
+
+/*  Timer */
+
+
 
 /* Custom scrollbar */
 * {
