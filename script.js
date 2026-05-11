@@ -121,7 +121,8 @@ function goBack() {
     }
 
     if (currentView === 'results') {
-        switchView('role');
+        currentQuizId = null;
+        switchView('student');
         return;
     }
 
