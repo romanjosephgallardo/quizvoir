@@ -157,7 +157,7 @@ function editQuiz(id) {
                     <button class="btn-remove" onclick="removeQuestion('${qId}')">Remove</button>
                 </div>
                 <div class="form-group"><label>Question</label><input type="text" class="q-text" value="${q.text}" placeholder="Enter your question here...."></div>
-                <div class="form-group"><label>Choices (Radio = Mark correct answer)</label>
+                <div class="form-group"><label>Choices (Mark the correct answer)</label>
                     <div class="choices">${q.choices.map((choice, i) => `
                         <div class="choice-item">
                             <input type="radio" name="correct-${qId}" value="${i}" ${i === q.correctIndex ? 'checked' : ''}>
@@ -205,7 +205,7 @@ function addQuestion() {
         <div class="question-block" id="block-${qId}">
             <div class="question-header"><span class="q-badge">Q${questionCount}</span><button class="btn-remove" onclick="removeQuestion('${qId}')">Remove</button></div>
             <div class="form-group"><label>Question</label><input type="text" class="q-text" placeholder="Enter your question here...."></div>
-            <div class="form-group"><label>Choices (Radio = Mark correct answer)</label>
+            <div class="form-group"><label>Choices (Mark the correct answer)</label>
                 <div class="choices">${['A', 'B', 'C', 'D'].map((c, i) => `
                     <div class="choice-item"><input type="radio" name="correct-${qId}" value="${i}" id="${qId}-opt-${i}"><span class="choice-label">${c}.</span><input type="text" class="q-choice" placeholder="Choice ${c}"></div>`).join('')}
                 </div>
