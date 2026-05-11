@@ -9,7 +9,7 @@
 <body>
     <header class="header">
         <a class="logo" onclick="switchView('role')">
-            <img src="./images/quizvoir.png" alt="QuizVoir Logo" style="height: 200px;">
+            <img id="quizVoirLogo" src="./images/quizvoir.png" alt="QuizVoir Logo">
         </a>
         <div class="header-badges">
             <div id="role-badge" class="badge hidden">
@@ -22,21 +22,21 @@
     <main class="container">
         <!-- ROLE SELECTION -->
         <section id="view-role" class="role-container">
-            <div class="logo" style="font-size: 4rem; margin-bottom: 0.5rem;">
-                <img src="./images/quizvoir.png" alt="QuizVoir Logo" style="height: 200px;">
+            <div class="role-logo">
+                <img id="quizVoirLogo" src="./images/quizvoir.png" alt="QuizVoir Logo">
             </div>
-            <p style="font-size: var(--fs-base-lg); color: var(--gray-blue-v2); margin-bottom: 3rem; letter-spacing: 2px;">
+            <p>
                 INTERACTIVE QUIZ PLATFORM
             </p>
             <div class="role-card">
                 <h2 class="role-title">What's your role?</h2>
                 <div class="role-buttons">
                     <button class="role-btn" onclick="switchView('teacher-dashboard')">
-                        <!-- add teacher icon here -->
+                        <img src="./images/teacher_icon.png" alt="Teacher" class="role-icon">
                         Teacher
                     </button>
                     <button class="role-btn" onclick="switchView('student')">
-                        <!-- add student icon here -->
+                        <img src="./images/student_icon.png" alt="Teacher" class="role-icon">
                         Student
                     </button>
                 </div>

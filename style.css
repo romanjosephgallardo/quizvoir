@@ -66,18 +66,19 @@ body {
 
 
 /* Layout */
-
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 3rem 2rem;
 }
 
+#quizVoirLogo {
+    padding: 0;
+    margin: 0; 
+}
 
-/* =========================
-   HEADER
-========================= */
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -93,10 +94,8 @@ body {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    font-size: var(--fs-xxl);
     font-weight: bold;
     color: var(--dark-gray-blue);
-    text-decoration: none;
     cursor: pointer;
 }
 
@@ -104,13 +103,19 @@ body {
     position: relative;
 }
 
+.logo #quizVoirLogo {
+    width: auto;
+    height: 100px;
+    padding: 0;
+    margin:-30px;
+}
+
+
 .logo span::after {
     content: '*';
-
     position: absolute;
     top: -10px;
     right: -8px;
-
     font-size: 12px;
 }
 
@@ -163,34 +168,35 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     min-height: 80vh;
-
     text-align: center;
 }
 
-.role-title {
-    margin-bottom: 2rem;
+.role-container p{
+    font-size: var(--fs-base-lg); 
+    color: var(--gray-blue-v2);
+    margin-bottom: 3rem;
+    letter-spacing: 2px;
+}
 
+.role-title {
+    margin-bottom: -10px;
     font-size: var(--fs-xl);
     color: var(--dark-gray-blue);
 }
 
 .role-card {
     padding: 3rem;
-
     background: var(--card-bg);
-
     border: 3px solid var(--dark-gray-blue);
     border-radius: 20px;
-
     box-shadow: 8px 8px 0 var(--dark-gray-blue);
+    margin-top: -30px
 }
 
 .role-buttons {
     display: flex;
     gap: 1.5rem;
-
     margin-top: 2rem;
 }
 
@@ -198,19 +204,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
-
+    gap: 10px;
     min-width: 180px;
-    padding: 1.2rem 2.5rem;
-
+    padding: 15px 20px;
     border: 3px solid var(--dark-gray-blue);
     border-radius: 12px;
-
     background: var(--dark-gray-blue);
     color: white;
-
     font-size: var(--fs-base-lg);
-
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -220,9 +221,17 @@ body {
     box-shadow: 4px 4px 0 var(--gray-blue-v2);
 }
 
-.role-btn svg {
-    width: 24px;
-    height: 24px;
+.role-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+#quizVoirLogo {
+    width: auto;
+    height: 200px;
+    padding: 0;
+    margin:-30px;
 }
 
 

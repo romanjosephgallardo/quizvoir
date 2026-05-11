@@ -7,6 +7,12 @@ const MAX_Q = 10, MIN_Q = 5;
 const getQuizzes = () => JSON.parse(localStorage.getItem('qv_quizzes') || '[]');
 const saveQuizzes = (data) => localStorage.setItem('qv_quizzes', JSON.stringify(data));
 
+
+// Initialize page on load
+document.addEventListener('DOMContentLoaded', () => {
+    switchView('role');
+});
+
 function switchView(view) {
     document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
     document.getElementById(`view-${view}`).classList.remove('hidden');
@@ -33,6 +39,7 @@ function switchView(view) {
     if (view === 'student') renderQuizList();
     if (view === 'teacher-dashboard') renderTeacherDashboard();
     if (view === 'teacher-create') resetTeacherForm();
+    
 }
 
 function goBack() {
