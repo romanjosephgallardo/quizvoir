@@ -1,3 +1,9 @@
+/* ============================================================
+   QUIZVOIR — STYLESHEET
+   ============================================================ */
+
+
+/* === CUSTOM PROPERTIES === */
 :root {
     /* Color Styles */
     --gray-blue: #8d99ae;
@@ -16,7 +22,7 @@
     --fs-xs: 13px;
     --fs-sm: 14px;
     --fs-base: 16px;
-    --fs-base-lg: 18px; 
+    --fs-base-lg: 18px;
     --fs-md: 20px;
     --fs-lg: 25px;
     --fs-xl: 31px;
@@ -27,31 +33,29 @@
     --Poppins: 'Poppins', sans-serif;
 }
 
-html, body {
-    font-family: var(--Poppins);
-}
 
+/* === FONT FACE === */
 @font-face {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
     src: url('fonts/Poppins/Poppins.woff2') format('woff2'),
-            url('fonts/Poppins/Poppins.woff') format('woff'),
-            url('fonts/Poppins/Poppins.ttf') format('truetype');
+         url('fonts/Poppins/Poppins.woff') format('woff'),
+         url('fonts/Poppins/Poppins.ttf') format('truetype');
 }
 
 
-input, textarea, button, select {
-    font-family: var(--Poppins);
-}
-
+/* === RESET & BASE === */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html, body {
+    font-family: var(--Poppins);
+}
 
 body {
     min-height: 100vh;
@@ -60,19 +64,26 @@ body {
     line-height: 1.6;
 }
 
+/* Applies Poppins to all interactive form elements */
+input, textarea, button, select {
+    font-family: var(--Poppins);
+}
+
+/* Utility class to hide any element */
 .hidden {
     display: none !important;
 }
 
 
-/* Layout */
+/* === LAYOUT === */
 .container {
     max-width: 900px;
     margin: 0 auto;
     padding: 3rem 2rem;
 }
 
-/* Header */
+
+/* === HEADER === */
 .header {
     display: flex;
     justify-content: space-between;
@@ -86,6 +97,7 @@ body {
     width: 100%;
 }
 
+/* Logo wrapper with asterisk decorative mark */
 .logo {
     display: flex;
     align-items: center;
@@ -99,14 +111,6 @@ body {
     position: relative;
 }
 
-.logo #quizVoirLogo {
-    width: auto;
-    height: 80px;
-    padding: 0;
-    margin:-30px;
-}
-
-
 .logo span::after {
     content: '*';
     position: absolute;
@@ -115,12 +119,21 @@ body {
     font-size: 12px;
 }
 
+/* Header logo image sizing */
+.logo #quizVoirLogo {
+    width: auto;
+    height: 80px;
+    padding: 0;
+    margin: -30px;
+}
+
 .header-badges {
     display: flex;
     gap: 0.8rem;
 }
 
 
+/* === BADGES === */
 .badge {
     display: flex;
     align-items: center;
@@ -134,6 +147,7 @@ body {
     transition: all 0.3s;
 }
 
+/* Outlined variant used for interactive/clickable badges */
 .badge-outline {
     background: transparent;
     color: var(--dark-gray-blue);
@@ -145,7 +159,8 @@ body {
     color: white;
 }
 
-/* Role Selection */
+
+/* === ROLE SELECTION === */
 .role-container {
     display: flex;
     flex-direction: column;
@@ -155,8 +170,8 @@ body {
     text-align: center;
 }
 
-.role-container p{
-    font-size: var(--fs-base-lg); 
+.role-container p {
+    font-size: var(--fs-base-lg);
     color: var(--gray-blue-v2);
     margin-bottom: 3rem;
     letter-spacing: 2px;
@@ -174,7 +189,7 @@ body {
     border: 3px solid var(--dark-gray-blue);
     border-radius: 20px;
     box-shadow: 8px 8px 0 var(--dark-gray-blue);
-    margin-top: -30px
+    margin-top: -30px;
 }
 
 .role-buttons {
@@ -215,21 +230,21 @@ body {
     margin-bottom: -3px;
 }
 
+/* Full-size logo used in the role selection screen */
 #quizVoirLogo {
     width: auto;
     height: 200px;
     padding: 0;
-    margin:-30px;
+    margin: -30px;
 }
 
 
-/* Card */
+/* === CARDS === */
 .card,
 .question-card,
 .question-block,
 .score-card {
     background: var(--card-bg);
-
     border: 3px solid var(--dark-gray-blue);
     border-radius: 20px;
 }
@@ -237,32 +252,26 @@ body {
 .card {
     padding: 2.5rem;
     margin-bottom: 2rem;
-
     box-shadow: 6px 6px 0 var(--dark-gray-blue);
 }
 
 .question-card {
     padding: 2rem;
     margin-bottom: 1.5rem;
-
     border-radius: 15px;
 }
 
 .question-block {
     position: relative;
-
     padding: 2rem;
     margin-bottom: 2rem;
-
     border-radius: 15px;
 }
 
 .score-card {
     padding: 3rem;
     margin-bottom: 2rem;
-
     text-align: center;
-
     box-shadow: 8px 8px 0 var(--dark-gray-blue);
 }
 
@@ -287,7 +296,8 @@ body {
     color: var(--dark-gray-blue);
 }
 
-/*  Typography */
+
+/* === TYPOGRAPHY === */
 .card-header {
     margin-bottom: 2rem;
 }
@@ -298,6 +308,7 @@ body {
     color: var(--dark-gray-blue);
 }
 
+/* Muted secondary text used across card subtitles, meta info, and counters */
 .card-subtitle,
 .quiz-meta,
 .stat-label,
@@ -307,27 +318,23 @@ body {
 
 .question-text {
     margin-bottom: 1.5rem;
-
     font-size: var(--fs-base-lg);
     line-height: 1.6;
 }
 
 .score-display {
     margin-bottom: 1rem;
-
     font-size: var(--fs-hero);
     font-weight: bold;
 }
 
 .score-message {
     margin-bottom: 0.5rem;
-
     font-size: var(--fs-lg);
 }
 
 
-
-/* Buttons */
+/* === BUTTONS === */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -342,35 +349,12 @@ body {
     transition: all 0.2s;
 }
 
-.btn-primary {
-    background: var(--dark-gray-blue);
-    color: white;
-}
-
-.btn-success {
-    background: var(--green);
-    color: white;
-}
-
-.btn-danger {
-    background: var(--red);
-    color: white;
-}
-
-.btn-warning {
-    background: #f4a261;
-    color: var(--dark-gray-blue);
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--dark-gray-blue);
-}
-
-.btn-small {
-    padding: 0.5rem 1rem;
-    font-size: var(--fs-sm);
-}
+.btn-primary  { background: var(--dark-gray-blue); color: white; }
+.btn-success  { background: var(--green); color: white; }
+.btn-danger   { background: var(--red); color: white; }
+.btn-warning  { background: #f4a261; color: var(--dark-gray-blue); }
+.btn-outline  { background: transparent; color: var(--dark-gray-blue); }
+.btn-small    { padding: 0.5rem 1rem; font-size: var(--fs-sm); }
 
 .btn:hover {
     transform: translateY(-2px);
@@ -388,8 +372,25 @@ body {
     color: white;
 }
 
+/* Remove button used in the quiz builder question blocks */
+.btn-remove {
+    background: var(--red);
+    color: white;
+    border: 2px solid var(--dark-gray-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    transition: all 0.2s;
+}
 
-/* Form Actions */
+.btn-remove:hover {
+    transform: scale(1.05);
+}
+
+
+/* === FORMS === */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -416,7 +417,6 @@ textarea {
 input[type="text"]:focus,
 textarea:focus {
     outline: none;
-
     border-color: var(--gray-blue);
     box-shadow: 3px 3px 0 var(--gray-blue);
 }
@@ -427,7 +427,7 @@ textarea {
     font-family: inherit;
 }
 
-/* Explanation field inside quiz builder */
+/* Taller explanation textarea used inside the quiz builder */
 textarea.q-exp {
     width: 100%;
     min-height: 200px;
@@ -444,17 +444,7 @@ textarea.q-exp {
 }
 
 
-
-/* Questions Block - Teacher */
-.question-block {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    border: 3px solid var(--dark-gray-blue);
-    margin-bottom: 2rem;
-    position: relative;
-}
-
+/* === QUIZ BUILDER (TEACHER) === */
 .question-header {
     display: flex;
     justify-content: space-between;
@@ -463,6 +453,7 @@ textarea.q-exp {
     gap: 1rem;
 }
 
+/* Small dark pill label showing question number */
 .q-badge {
     background: var(--dark-gray-blue);
     color: white;
@@ -470,22 +461,6 @@ textarea.q-exp {
     border-radius: 8px;
     font-weight: bold;
     font-size: var(--fs-sm);
-}
-
-.btn-remove {
-    background: var(--red);
-    color: white;
-    border: 2px solid var(--dark-gray-blue);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: var(--fs-sm);
-    font-weight: 600;
-    transition: all 0.2s;
-}
-
-.btn-remove:hover {
-    transform: scale(1.05);
 }
 
 .choices {
@@ -523,6 +498,7 @@ textarea.q-exp {
     color: var(--dark-gray-blue);
 }
 
+/* Transparent text input inside choice rows */
 .choice-item input[type="text"].q-choice {
     flex: 1;
     background: transparent;
@@ -543,7 +519,16 @@ textarea.q-exp {
     margin-bottom: 0;
 }
 
-/* Quiz List - Teacher Dashboard */
+/* Shared action row above the quiz list on the teacher dashboard */
+.teacher-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+/* === QUIZ LIST (TEACHER DASHBOARD) === */
 .quiz-list-item {
     display: flex;
     justify-content: space-between;
@@ -579,26 +564,8 @@ textarea.q-exp {
     flex-wrap: wrap;
 }
 
-/* Misc */
-.teacher-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 20px;
-}
 
-.error {
-    display: block;
-    padding: 0.9rem 1rem;
-    background: rgba(230, 57, 70, 0.12);
-    color: var(--red);
-    border: 2px solid var(--red);
-    border-left: 5px solid var(--red);
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-/* Quiz Display - Student */
+/* === QUIZ DISPLAY (STUDENT) === */
 .quiz-header {
     display: flex;
     justify-content: space-between;
@@ -637,43 +604,7 @@ textarea.q-exp {
     min-height: 200px;
 }
 
-.quiz-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--card-bg);
-    border-top: 3px solid var(--dark-gray-blue);
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    z-index: 100;
-    max-width: 100%;
-}
-
-.answer-counter {
-    font-size: var(--fs-base);
-    color: var(--gray-blue-v2);
-    font-weight: 600;
-}
-
-.btn-submit {
-    background: var(--dark-gray-blue);
-    color: white;
-    border: 3px solid var(--dark-gray-blue);
-    padding: 0.8rem 2rem;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-.btn-submit:hover {
-    background: var(--green);
-    border-color: var(--dark-gray-blue);
-}
-
-/* Quiz Question Cards */
+/* Student question cards with subtle gradient and hard shadow */
 .quiz-question-card {
     background: linear-gradient(180deg, #b7c1d2 0%, #a8b2c1 100%);
     border: 3px solid var(--dark-gray-blue);
@@ -696,6 +627,7 @@ textarea.q-exp {
     margin-bottom: 1.25rem;
 }
 
+/* Overrides base .question-text for the active quiz view */
 .question-text {
     margin-bottom: 0;
     font-size: var(--fs-base-lg);
@@ -748,22 +680,36 @@ textarea.q-exp {
     line-height: 1.5;
 }
 
+
+/* === FOOTER BAR === */
+
+/* Shared sticky footer base — used by both student quiz and teacher builder */
+.quiz-footer,
 .footer-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(168, 178, 193, 0.96);
-    backdrop-filter: blur(8px);
-    border-top: 5px solid var(--dark-gray-blue);
-    padding: 1rem 2rem;
+    background: var(--card-bg);
+    border-top: 3px solid var(--dark-gray-blue);
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
+    z-index: 100;
+    max-width: 100%;
+}
+
+.footer-bar {
+    background: rgba(168, 178, 193, 0.96);
+    backdrop-filter: blur(8px);
+    border-top-width: 5px;
     gap: 1rem;
     z-index: 1000;
 }
 
+/* Error toast anchored above the footer bar */
 .footer-bar .error {
     position: absolute;
     bottom: calc(100% + 1rem);
@@ -787,17 +733,34 @@ textarea.q-exp {
 }
 
 @keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* Timer */
+.answer-counter {
+    font-size: var(--fs-base);
+    color: var(--dark-gray-blue);
+    font-weight: 700;
+}
+
+.btn-submit {
+    min-width: 180px;
+    justify-content: center;
+    background: var(--dark-gray-blue);
+    color: white;
+    border: 3px solid var(--dark-gray-blue);
+    padding: 0.9rem 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background: var(--green);
+    color: white;
+}
+
+
+/* === TIMER === */
 .footer-timer {
     min-width: 220px;
 }
@@ -828,6 +791,7 @@ textarea.q-exp {
     overflow: hidden;
 }
 
+/* Fill transitions from green → orange → red as time runs low */
 .time-progress-fill {
     height: 100%;
     width: 0%;
@@ -841,29 +805,7 @@ textarea.q-exp {
 }
 
 
-.answer-counter {
-    font-size: var(--fs-base);
-    color: var(--dark-gray-blue);
-    font-weight: 700;
-}
-
-.btn-submit {
-    min-width: 180px;
-    justify-content: center;
-    background: var(--dark-gray-blue);
-    color: white;
-    border: 3px solid var(--dark-gray-blue);
-    padding: 0.9rem 1.5rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.btn-submit:hover {
-    background: var(--green);
-    color: white;
-}
-
-/* Results Review Section - Student */
+/* === RESULTS REVIEW (STUDENT) === */
 .review-item {
     background: linear-gradient(180deg, #dee8ed 0%, #d3dce6 100%);
     border: 3px solid var(--dark-gray-blue);
@@ -879,13 +821,9 @@ textarea.q-exp {
     box-shadow: 8px 8px 0 var(--dark-gray-blue);
 }
 
-.review-correct {
-    border-left: 6px solid var(--green);
-}
-
-.review-incorrect {
-    border-left: 6px solid var(--red);
-}
+/* Left border accent indicates correct or incorrect answer */
+.review-correct   { border-left: 6px solid var(--green); }
+.review-incorrect { border-left: 6px solid var(--red); }
 
 .review-header {
     display: flex;
@@ -946,16 +884,8 @@ textarea.q-exp {
     gap: 0.8rem;
 }
 
-.review-answer strong {
-    color: var(--dark-gray-blue);
-    font-weight: 700;
-}
-
-.review-answer span {
-    font-weight: 600;
-    font-style: italic;
-    flex: 1;
-}
+.review-answer strong { color: var(--dark-gray-blue); font-weight: 700; }
+.review-answer span   { font-weight: 600; font-style: italic; flex: 1; }
 
 .result-choices-section {
     margin-bottom: 1.5rem;
@@ -986,23 +916,10 @@ textarea.q-exp {
     transition: all 0.2s ease;
 }
 
-.result-choice-item.student-wrong {
-    background: rgba(230, 57, 70, 0.2);
-    border-color: var(--red);
-    border-left: 5px solid var(--red);
-}
-
-.result-choice-item.correct-highlight {
-    background: rgba(42, 157, 143, 0.2);
-    border-color: var(--green);
-    border-left: 5px solid var(--green);
-}
-
-.result-choice-item.student-correct {
-    background: rgba(42, 157, 143, 0.2);
-    border-color: var(--green);
-    border-left: 5px solid var(--green);
-}
+/* Highlight states for student's selected answer and the correct answer */
+.result-choice-item.student-wrong    { background: rgba(230, 57, 70, 0.2);  border-color: var(--red);   border-left: 5px solid var(--red); }
+.result-choice-item.correct-highlight { background: rgba(42, 157, 143, 0.2); border-color: var(--green); border-left: 5px solid var(--green); }
+.result-choice-item.student-correct  { background: rgba(42, 157, 143, 0.2); border-color: var(--green); border-left: 5px solid var(--green); }
 
 .choice-letter {
     min-width: 28px;
@@ -1025,23 +942,12 @@ textarea.q-exp {
     white-space: nowrap;
 }
 
-.student-wrong .choice-marker {
-    background: var(--red);
-    color: white;
-}
-
-.correct-highlight .choice-marker {
-    background: var(--green);
-    color: white;
-}
-
-.student-correct .choice-marker {
-    background: var(--green);
-    color: white;
-}
+.student-wrong .choice-marker    { background: var(--red);   color: white; }
+.correct-highlight .choice-marker { background: var(--green); color: white; }
+.student-correct .choice-marker  { background: var(--green); color: white; }
 
 
-/* Teacher create sticky footer */
+/* === TEACHER CREATE FOOTER === */
 .teacher-footer {
     background: rgba(168, 178, 193, 0.97);
     border-top: 5px solid var(--dark-gray-blue);
@@ -1060,6 +966,7 @@ textarea.q-exp {
     margin-bottom: 0.35rem;
 }
 
+/* Inline error inside the teacher footer (not a floating toast) */
 .teacher-footer-left .error {
     position: static;
     transform: none;
@@ -1077,7 +984,21 @@ textarea.q-exp {
     justify-content: flex-end;
 }
 
-/* Custom scrollbar */
+
+/* === ERROR STATE === */
+.error {
+    display: block;
+    padding: 0.9rem 1rem;
+    background: rgba(230, 57, 70, 0.12);
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-left: 5px solid var(--red);
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+
+/* === SCROLLBAR === */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--dark-gray-blue) transparent;
@@ -1091,27 +1012,18 @@ textarea.q-exp {
 ::-webkit-scrollbar-track {
     background: transparent;
     border-radius: 999px;
-    margin: 4px; /* adds breathing room at the ends */
+    margin: 4px;
 }
 
+/* Gradient thumb with padding via background-clip */
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, var(--dark-gray-blue), var(--gray-blue-v2));
     border-radius: 999px;
     border: 2px solid transparent;
-    background-clip: padding-box; /* makes border act as padding, not color */
+    background-clip: padding-box;
     transition: background 0.2s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--dark-gray-blue);
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:active {
-    background: var(--gray-blue-v2);
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-corner {
-    background: transparent;
-}
+::-webkit-scrollbar-thumb:hover  { background: var(--dark-gray-blue); background-clip: padding-box; }
+::-webkit-scrollbar-thumb:active { background: var(--gray-blue-v2);   background-clip: padding-box; }
+::-webkit-scrollbar-corner       { background: transparent; }
